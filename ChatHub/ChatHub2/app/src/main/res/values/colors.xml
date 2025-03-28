@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Dark">#001A83</color>
+    <color name="Default">#002DE3</color>
+    <color name="DarkMode">#375FFF</color>
+    <color name="Light">#879FFF</color>
+    <color name="Background">#D2D5F9</color>
+    <color name="Active">#0F1828</color>
+    <color name="NeutralDark">#152033</color>
+    <color name="Body">#1B2B48</color>
+    <color name="Weak">#A4A4A4</color>
+    <color name="Disabled">#ADB5BD</color>
+    <color name="Line">#EDEDED</color>
+    <color name="OffWhite">#F7F7FC</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
