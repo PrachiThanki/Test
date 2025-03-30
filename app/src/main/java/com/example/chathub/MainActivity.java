@@ -14,7 +14,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    ImageView search;
+    private ImageView search;
     private Fragment chatFragment;
     private Fragment profileFragment;
 
@@ -27,13 +27,18 @@ public class MainActivity extends AppCompatActivity {
         chatFragment = new chatfragment();
         profileFragment = new profilefragment();
 
-        // Initialize bottom navigation
+        // Initialize views
         bottomNavigationView = findViewById(R.id.bottomNav);
         search = findViewById(R.id.search);
+
+        if (search == null) {
+            throw new NullPointerException("Search ImageView is null. Check activity_main.xml");
+        }
 
         search.setOnClickListener((v) -> {
             startActivity(new Intent(MainActivity.this, searchUserActivity.class));
         });
+
         // Set initial fragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
-        // Set up bottom navigation listener
+        // Bottom navigation listener
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
