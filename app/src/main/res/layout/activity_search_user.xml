@@ -34,7 +34,6 @@
             android:background="@color/NeutralDark"
             android:src="@drawable/backicon"
             android:layout_alignParentStart="true"/>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -62,15 +61,21 @@
             android:paddingEnd="10dp"
             android:singleLine="true"/>
 
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/searchEditText"
+            android:padding="10dp"
+            android:contentDescription="Search"/>
     </RelativeLayout>
-    
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchUserLayout"
         android:background="@color/Active"
         android:padding="10dp"
-        android:id="@+id/searchUserRecycler"
-
-
+        android:id="@+id/searchUserRecycler"/>
 </RelativeLayout>

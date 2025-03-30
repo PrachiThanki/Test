@@ -4,12 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class searchUserActivity extends AppCompatActivity {
@@ -18,16 +15,14 @@ public class searchUserActivity extends AppCompatActivity {
     ImageButton backbutton;
     RecyclerView recyclerView;
 
-
-
     @SuppressLint({"WrongViewCast", "CutPasteId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
 
-        searchInput = findViewById(R.id.search);
-        searchButton = findViewById(R.id.search);
+        searchInput = findViewById(R.id.searchEditText);
+        searchButton = findViewById(R.id.searchButton);
         backbutton = findViewById(R.id.backButton);
         recyclerView = findViewById(R.id.searchUserRecycler);
 
@@ -36,17 +31,20 @@ public class searchUserActivity extends AppCompatActivity {
         backbutton.setOnClickListener((v) -> {
             onBackPressed();
         });
-        searchButton.setOnClickListener((v) ->{
-            String searchTerm = searchInput.getText().toString();
-            if (searchTerm.isEmpty() || searchTerm.length()<3){
+
+        searchButton.setOnClickListener((v) -> {
+            String searchTerm = searchInput.getText().toString().trim();
+            if (searchTerm.isEmpty() || searchTerm.length() < 3) {
                 searchInput.setError("Invalid Username");
                 return;
             }
+            Toast.makeText(this, "Searching for: " + searchTerm, Toast.LENGTH_SHORT).show();
             setupSearchRecyclerView(searchTerm);
         });
     }
 
     private void setupSearchRecyclerView(String searchTerm) {
-
+        // Implement your RecyclerView search logic here
+        Toast.makeText(this, "Search feature not yet implemented", Toast.LENGTH_SHORT).show();
     }
 }
