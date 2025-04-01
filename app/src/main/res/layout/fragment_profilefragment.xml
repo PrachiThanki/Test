@@ -3,13 +3,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profilefragment">
+    android:background="@color/Active"
+    tools:context=".ProfileActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Top Bar with Back Button and Title -->
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Profile Screen"
-        android:textSize="22sp"
-        android:layout_centerInParent="true"/>
+        android:background="@color/Active"
+        android:padding="16dp">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@color/Active"
+            android:src="@drawable/backicon"
+            android:contentDescription="Go back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/Active"
+            android:text="Your Profile"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <!-- Profile Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Active"
+        android:layout_below="@id/topBar"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Profile Avatar -->
+        <FrameLayout
+            android:id="@+id/avatarContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp">
+
+            <ImageView
+                android:id="@+id/ivProfileBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/Active" />
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="12dp"
+                android:background="@color/Active"
+                android:contentDescription="Profile Picture"
+                android:src="@drawable/profile" />
+
+        </FrameLayout>
+
+        <!-- First Name Input -->
+        <EditText
+            android:id="@+id/firstNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/rounded_border"
+            android:hint="First Name"
+            android:padding="16dp"
+            android:text="Athalia"
+            android:textColor="@color/white"
+            android:textColorHint="@color/OffWhite" />
+
+        <!-- Last Name Input -->
+        <EditText
+            android:id="@+id/lastNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_border"
+            android:hint="Last Name"
+            android:padding="16dp"
+            android:text="Putri"
+            android:textColor="@color/white"
+            android:textColorHint="@color/OffWhite" />
+
+        <!-- Save Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/DarkMode"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
