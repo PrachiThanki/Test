@@ -51,7 +51,7 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_border"
             android:hint=" Search"
-            android:drawableStart="@drawable/search"
+
             android:drawablePadding="10dp"
             android:textColor="@color/OffWhite"
             android:textColorHint="@color/OffWhite"
@@ -67,6 +67,8 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/searchEditText"
+            android:background="@android:color/transparent"
+            android:src="@drawable/search"
             android:padding="10dp"
             android:contentDescription="Search"/>
     </RelativeLayout>

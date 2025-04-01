@@ -4,17 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    private ImageView search;
+    ImageView search;
     private Fragment chatFragment;
     private Fragment profileFragment;
 
@@ -23,20 +21,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize fragments
+        // Initialize Fragments
         chatFragment = new chatfragment();
         profileFragment = new profilefragment();
 
-        // Initialize views
+        // Initialize UI elements
         bottomNavigationView = findViewById(R.id.bottomNav);
         search = findViewById(R.id.search);
 
-        if (search == null) {
-            throw new NullPointerException("Search ImageView is null. Check activity_main.xml");
-        }
-
-        search.setOnClickListener((v) -> {
-            startActivity(new Intent(MainActivity.this, searchUserActivity.class));
+        // Search button functionality
+        search.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, searchUserActivity.class);
+            startActivity(intent);
         });
 
         // Set initial fragment
@@ -46,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
-        // Bottom navigation listener
+        // Bottom Navigation Item Selection
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
