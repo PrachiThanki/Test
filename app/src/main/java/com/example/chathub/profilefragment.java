@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.storage.UploadTask;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -114,7 +115,16 @@ public class profilefragment extends Fragment {
 
         currentUserModel.setFirstName(newusername);
         setInProgress(true);
-        updateToFirestore();
+
+        if (selectedImageUrl!=null) {
+            FirebaseUtil.getCurrentProfilePicStorageRef().putFile(selectedImageUrl)
+                    .addOnCompleteListener(task -> {
+                        updateToFirestore();
+                    });
+        }else {
+            updateToFirestore();
+        }
+
     }
     void updateToFirestore(){
         FirebaseUtil.currentUserDetails().set(currentUserModel)
@@ -130,6 +140,14 @@ public class profilefragment extends Fragment {
 
     private void getUserData() {
         setInProgress(true);
+
+        FirebaseUtil.getCurrentProfilePicStorageRef().getDownloadUrl()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()){
+                                Uri uri = task.getResult();
+                                AndroidUtil.setProffile(getContext(),uri,profilePic);
+                            }
+                        });
         FirebaseUtil.currentUserDetails().get().addOnCompleteListener(task ->{
             setInProgress(false);
             currentUserModel = task.getResult().toObject(User.class);
