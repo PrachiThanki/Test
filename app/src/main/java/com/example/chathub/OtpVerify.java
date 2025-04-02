@@ -37,7 +37,7 @@ public class OtpVerify extends AppCompatActivity {
     TextView resend;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    // New variables for resend timer
+
     private CountDownTimer resendTimer;
     private boolean isResendEnabled = true;
 
@@ -144,7 +144,7 @@ public class OtpVerify extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     setInProgress(false);
                     if (task.isSuccessful()) {
-                        // Verification successful - proceed to next activity
+                        // Verification successful one can proceed to next activity
                         AndroidUtil.showToast(getApplicationContext(), "Verification successful!");
 
                         Intent intent = new Intent(OtpVerify.this, Profile.class);
@@ -182,7 +182,7 @@ public class OtpVerify extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                // Re-enable resend button
+                // resend button
                 isResendEnabled = true;
                 resend.setText("Resend OTP");
                 resend.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
@@ -193,7 +193,7 @@ public class OtpVerify extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Cancel the timer to prevent memory leaks
+        // Cancel the timer
         if (resendTimer != null) {
             resendTimer.cancel();
         }

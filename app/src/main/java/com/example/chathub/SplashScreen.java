@@ -12,6 +12,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        //if we don't use an handler the splashscreen will instantly disappear
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             startActivity(new Intent(SplashScreen.this, LoginActivity.class));
             finish(); // Ensures user cannot go back to SplashScreen

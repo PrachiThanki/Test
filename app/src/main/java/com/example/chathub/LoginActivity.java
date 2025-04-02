@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         phoneInput = findViewById(R.id.phoneInput);
         sendOtpBtn = findViewById(R.id.sendotpbtn);
 
+        // this will link both the edit text for mobile and flag selector
         countryCodePicker.registerCarrierNumberEditText(phoneInput);
 
         sendOtpBtn.setOnClickListener((v)->{
