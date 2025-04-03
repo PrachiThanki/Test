@@ -12,30 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:background="@color/Active"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/Active">
 
         <ImageView
-            android:layout_marginLeft="100dp"
-            android:layout_width="260dp"
-            android:layout_marginTop="-100dp"
-            android:layout_height="260dp"
-            android:layout_marginBottom="-85dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:background="@color/Active"
-            android:src="@drawable/applogo" />
+            android:src="@drawable/logo_final"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="4dp"/>  <!-- Reduced space -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CHATHUB"
             android:background="@color/Active"
+            android:text="CHATHUB"
             android:textColor="@color/OffWhite"
-            android:textSize="30dp"
-            android:textStyle="bold"/>
-        <ProgressBar
-            android:layout_width="32dp"
-            android:layout_height="wrap_content"
-            android:background="@color/Active"/>
-    </LinearLayout>
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/> <!-- Reduced space -->
 
+        <ProgressBar
+            android:background="@color/Active"
+            android:layout_width="32dp"
+            android:layout_height="32dp"/>
+    </LinearLayout>
 
 </RelativeLayout>
