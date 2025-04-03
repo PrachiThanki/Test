@@ -22,4 +22,10 @@ public class FirebaseUtil {
         return FirebaseStorage.getInstance().getReference().child("profile_pic")
                 .child(FirebaseUtil.currentUserId());
     }
+    public static boolean isLogged(){
+        if(currentUserId()!=null){
+            return  true;
+        }
+        return false;
+    }
 }

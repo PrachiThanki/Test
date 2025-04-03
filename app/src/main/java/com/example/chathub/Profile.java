@@ -102,10 +102,8 @@ public class Profile extends AppCompatActivity {
         String firstName = etFirstName.getText().toString().trim();
         String lastName = etLastName.getText().toString().trim();
 
-        // Validate first name
-        if (firstName.isEmpty()) {
-            etFirstName.setError("First name is required");
-            etFirstName.requestFocus();
+        // Validate inputs
+        if (!validateInputs(firstName, lastName)) {
             return;
         }
 
@@ -133,6 +131,62 @@ public class Profile extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     AndroidUtil.showToast(getApplicationContext(), "Failed to save profile: " + e.getMessage());
                 });
+    }
+
+    private boolean validateInputs(String firstName, String lastName) {
+
+        if (firstName.isEmpty()) {
+            etFirstName.setError("First name is required");
+            etFirstName.requestFocus();
+            return false;
+        }
+
+        if (firstName.length() < 2) {
+            etFirstName.setError("First name must be at least 2 characters");
+            etFirstName.requestFocus();
+            return false;
+        }
+
+        if (firstName.length() > 50) {
+            etFirstName.setError("First name cannot exceed 50 characters");
+            etFirstName.requestFocus();
+            return false;
+        }
+
+        if (!firstName.matches("[a-zA-Z]+")) {
+            etFirstName.setError("First name must contain only letters");
+            etFirstName.requestFocus();
+            return false;
+        }
+
+
+        if (!lastName.isEmpty()) {
+            if (lastName.length() < 2) {
+                etLastName.setError("Last name must be at least 2 characters");
+                etLastName.requestFocus();
+                return false;
+            }
+
+            if (lastName.length() > 50) {
+                etLastName.setError("Last name cannot exceed 50 characters");
+                etLastName.requestFocus();
+                return false;
+            }
+
+            if (!lastName.matches("[a-zA-Z]+")) {
+                etLastName.setError("Last name must contain only letters");
+                etLastName.requestFocus();
+                return false;
+            }
+        }
+
+        // Check if user is authenticated
+        if (mAuth.getCurrentUser() == null) {
+            AndroidUtil.showToast(getApplicationContext(), "User not authenticated");
+            return false;
+        }
+
+        return true;
     }
 
     private void loadExistingProfile() {

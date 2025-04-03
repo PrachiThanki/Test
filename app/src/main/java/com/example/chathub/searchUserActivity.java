@@ -1,5 +1,6 @@
 package com.example.chathub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,6 +25,10 @@ public class searchUserActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
         backButton = findViewById(R.id.backButton);
         recyclerView = findViewById(R.id.searchUserRecycler);
+
+        backButton.setOnClickListener((v -> {
+            startActivity(new Intent(searchUserActivity.this, MainActivity.class));
+        }));
 
         // Debugging toast to check if the activity opens
         Toast.makeText(this, "Search Page Opened", Toast.LENGTH_LONG).show();

@@ -16,13 +16,13 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_marginLeft="100dp"
             android:layout_width="260dp"
-            android:layout_marginTop="-100dp"
             android:layout_height="260dp"
-            android:layout_marginBottom="-85dp"
+            android:layout_marginTop="-100dp"
+            android:layout_marginBottom="-40dp"
             android:background="@color/Active"
-            android:src="@drawable/applogo" />
+            android:src="@drawable/logofinalfinal" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -56,16 +56,16 @@ public class profilefragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imagePickLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                    result -> {
-                        if (result.getResultCode() == Activity.RESULT_OK){
-                            Intent data = result.getData();
-                            if (data != null && data.getData() != null){
-                                selectedImageUrl = data.getData();
-                                AndroidUtil.setProffile(getContext(),selectedImageUrl,profilePic);
-                            }
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK){
+                        Intent data = result.getData();
+                        if (data != null && data.getData() != null){
+                            selectedImageUrl = data.getData();
+                            AndroidUtil.setProffile(getContext(),selectedImageUrl,profilePic);
                         }
                     }
-                );
+                }
+        );
     }
 
     @SuppressLint("MissingInflatedId")
@@ -89,7 +89,7 @@ public class profilefragment extends Fragment {
 
         logoutButton.setOnClickListener((v ->{
             FirebaseUtil.logout();
-            Intent intent = new Intent(getContext(),SplashScreen.class);
+            Intent intent = new Intent(getContext(), SplashScreen.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }));
@@ -107,16 +107,23 @@ public class profilefragment extends Fragment {
         return view;
     }
 
-    void updateButtonClick(){
-        String newusername = usernameInput.getText().toString();
-        if(newusername.isEmpty() || newusername.length() < 3){
-            usernameInput.setError("Username should be at least 3 characters long!");
+    void updateButtonClick() {
+        String newUsername = usernameInput.getText().toString().trim();
+        String newLastName = userLastnameInput.getText().toString().trim();
+        String newPhone = phoneInput.getText().toString().trim();
+
+        // Validate inputs
+        if (!validateInputs(newUsername, newLastName, newPhone)) {
+            return;
         }
 
-        currentUserModel.setFirstName(newusername);
-        setInProgress(true);
+        // Update user model
+        currentUserModel.setFirstName(newUsername);
+        currentUserModel.setLastName(newLastName);
+        currentUserModel.setPhoneNumber(newPhone);
 
-        if (selectedImageUrl!=null) {
+        setInProgress(true);
+        if(selectedImageUrl != null) {
             FirebaseUtil.getCurrentProfilePicStorageRef().putFile(selectedImageUrl)
                     .addOnCompleteListener(task -> {
                         updateToFirestore();
@@ -125,16 +132,18 @@ public class profilefragment extends Fragment {
             updateToFirestore();
         }
 
+
     }
-    void updateToFirestore(){
+
+    void updateToFirestore() {
         FirebaseUtil.currentUserDetails().set(currentUserModel)
                 .addOnCompleteListener(task -> {
                     setInProgress(false);
-                   if(task.isSuccessful()){
-                       AndroidUtil.showToast(getContext(),"Updated successfully!");
-                   }else{
-                       AndroidUtil.showToast(getContext(),"Update failed!");
-                   }
+                    if (task.isSuccessful()) {
+                        AndroidUtil.showToast(getContext(), "Updated successfully!");
+                    } else {
+                        AndroidUtil.showToast(getContext(), "Update failed!");
+                    }
                 });
     }
 
@@ -142,20 +151,21 @@ public class profilefragment extends Fragment {
         setInProgress(true);
 
         FirebaseUtil.getCurrentProfilePicStorageRef().getDownloadUrl()
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()){
-                                Uri uri = task.getResult();
-                                AndroidUtil.setProffile(getContext(),uri,profilePic);
-                            }
-                        });
-        FirebaseUtil.currentUserDetails().get().addOnCompleteListener(task ->{
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Uri uri = task.getResult();
+                        AndroidUtil.setProffile(getContext(), uri, profilePic);
+                    }
+                });
+        FirebaseUtil.currentUserDetails().get().addOnCompleteListener(task -> {
             setInProgress(false);
             currentUserModel = task.getResult().toObject(User.class);
             usernameInput.setText(currentUserModel.getFirstName());
             userLastnameInput.setText(currentUserModel.getLastName());
-            phoneInput.setText((currentUserModel.getPhoneNumber()));
+            phoneInput.setText(currentUserModel.getPhoneNumber());
         });
     }
+
     void setInProgress(Boolean inProgress) {
         if (inProgress) {
             progressBar.setVisibility(View.VISIBLE);
@@ -166,5 +176,73 @@ public class profilefragment extends Fragment {
         }
     }
 
+    private boolean validateInputs(String username, String lastName, String phone) {
+        // Username (First Name) validation
+        if (username.isEmpty()) {
+            usernameInput.setError("First name is required");
+            usernameInput.requestFocus();
+            return false;
+        }
 
+        if (username.length() < 2) {
+            usernameInput.setError("First name must be at least 2 characters");
+            usernameInput.requestFocus();
+            return false;
+        }
+
+        if (username.length() > 50) {
+            usernameInput.setError("First name cannot exceed 50 characters");
+            usernameInput.requestFocus();
+            return false;
+        }
+
+        if (!username.matches("[a-zA-Z]+")) {
+            usernameInput.setError("First name must contain only letters");
+            usernameInput.requestFocus();
+            return false;
+        }
+
+        // Last Name validation (optional field, but if provided, validate it)
+        if (!lastName.isEmpty()) {
+            if (lastName.length() < 2) {
+                userLastnameInput.setError("Last name must be at least 2 characters");
+                userLastnameInput.requestFocus();
+                return false;
+            }
+
+            if (lastName.length() > 50) {
+                userLastnameInput.setError("Last name cannot exceed 50 characters");
+                userLastnameInput.requestFocus();
+                return false;
+            }
+
+            if (!lastName.matches("[a-zA-Z]+")) {
+                userLastnameInput.setError("Last name must contain only letters");
+                userLastnameInput.requestFocus();
+                return false;
+            }
+        }
+
+        // Phone number validation
+        if (phone.isEmpty()) {
+            phoneInput.setError("Phone number is required");
+            phoneInput.requestFocus();
+            return false;
+        }
+
+        // Updated regex: Requires optional + followed by 1-3 digit country code and 9-12 digit number
+        if (!phone.matches("^\\+?[1-9]\\d{1,14}$")) {
+            phoneInput.setError("Enter a valid phone number (e.g., +12345678901)");
+            phoneInput.requestFocus();
+            return false;
+        }
+
+        // Check if user is authenticated
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            AndroidUtil.showToast(getContext(), "User not authenticated");
+            return false;
+        }
+
+        return true;
+    }
 }

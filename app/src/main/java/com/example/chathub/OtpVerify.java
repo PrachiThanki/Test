@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chathub.utils.AndroidUtil;
+import com.example.chathub.utils.FirebaseUtil;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -44,8 +45,12 @@ public class OtpVerify extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verify);
+
+
 
         otpInput = findViewById(R.id.editTextOtp);
         nextButton = findViewById(R.id.btnVerify);
