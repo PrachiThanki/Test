@@ -13,7 +13,7 @@ public class AndroidUtil {
         Toast.makeText(context,message,Toast.LENGTH_LONG).show();
     }
     public static void setProffile(Context context, Uri imageUri, ImageView imageView){
-        Glide.with(context).load(imageUri).apply(RequestOptions.centerCropTransform()).into(imageView);
+        Glide.with(context).load(imageUri).apply(RequestOptions.circleCropTransform()).into(imageView);
 
     }
 }

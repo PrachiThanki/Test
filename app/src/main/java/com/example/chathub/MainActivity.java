@@ -39,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, searchUserActivity.class));
         });
 
-        // Set initial fragment
+        // Set initial fragment state
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_frame_layout, chatFragment)
+                    .add(R.id.main_frame_layout, profileFragment, "profile")
+                    .hide(profileFragment)
+                    .add(R.id.main_frame_layout, chatFragment, "chat")
                     .commit();
         }
 
@@ -51,17 +53,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
+                Fragment unselectedFragment = null;
 
                 int itemId = item.getItemId();
                 if (itemId == R.id.menu_chat) {
-                    selectedFragment = chatFragment;
+                    selectedFragment = getSupportFragmentManager().findFragmentByTag("chat");
+                    unselectedFragment = getSupportFragmentManager().findFragmentByTag("profile");
                 } else if (itemId == R.id.profile) {
-                    selectedFragment = profileFragment;
+                    selectedFragment = getSupportFragmentManager().findFragmentByTag("profile");
+                    unselectedFragment = getSupportFragmentManager().findFragmentByTag("chat");
                 }
 
-                if (selectedFragment != null) {
+                if (selectedFragment != null && unselectedFragment != null) {
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_frame_layout, selectedFragment)
+                            .hide(unselectedFragment)
+                            .show(selectedFragment)
                             .commit();
                     return true;
                 }

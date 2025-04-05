@@ -4,43 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Active"
-    tools:context=".ProfileActivity">
+    tools:context=".profilefragment">
 
     <!-- Top Bar with Back Button and Title -->
+
+    <!-- Profile Content -->
     <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/Active"
-        android:padding="16dp">
+        android:padding="16dp"/>
 
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:background="@color/Active"
-            android:src="@drawable/backicon"
-            android:contentDescription="Go back" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@color/Active"
-            android:text="Your Profile"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
-    </RelativeLayout>
-
-    <!-- Profile Content -->
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/Active"
         android:layout_below="@id/topBar"
+        android:background="@color/Active"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -49,14 +30,9 @@
             android:id="@+id/avatarContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/Active"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp">
-
-            <ImageView
-                android:id="@+id/ivProfileBackground"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/Active" />
 
             <ImageView
                 android:id="@+id/ivProfile"
@@ -77,33 +53,72 @@
             android:layout_marginTop="36dp"
             android:background="@drawable/rounded_border"
             android:hint="First Name"
-            android:padding="16dp"
-            android:text="Athalia"
+            android:padding="10dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/OffWhite" />
-
-        <!-- Last Name Input -->
+            android:textColorHint="@color/Disabled" />
         <EditText
-            android:id="@+id/lastNameInput"
+            android:id="@+id/lastnameinput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/rounded_border"
             android:hint="Last Name"
-            android:padding="16dp"
-            android:text="Putri"
+            android:padding="10dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/OffWhite" />
+            android:textColorHint="@color/Disabled" />
+
+        <!-- Last Name Input -->
+        <EditText
+            android:id="@+id/PhoneInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_border"
+            android:hint="Phone"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/Disabled" />
+
 
         <!-- Save Button -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/saveButton"
+            android:id="@+id/UpdateProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/DarkMode"
-            android:text="Save"
-            android:textColor="@color/white"
-            android:textAllCaps="false" />
+            android:text="Update profile"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:id="@+id/progress"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="178dp"
+        android:layout_marginEnd="185dp"
+        android:layout_marginBottom="195dp"
+        android:background="@color/Active" />
+
+    <TextView
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/logout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="179dp"
+        android:layout_marginBottom="156dp"
+        android:background="@color/Active"
+        android:text="Logout"
+        android:textColor="@color/Disabled"
+        android:textSize="18dp" />
+
+</RelativeLayout>

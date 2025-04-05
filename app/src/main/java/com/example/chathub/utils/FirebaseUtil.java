@@ -17,4 +17,15 @@ public class FirebaseUtil {
     public static void logout(){
         FirebaseAuth.getInstance().signOut();
     }
+
+    public static StorageReference getCurrentProfilePicStorageRef(){
+        return FirebaseStorage.getInstance().getReference().child("profile_pic")
+                .child(FirebaseUtil.currentUserId());
+    }
+    public static boolean isLogged(){
+        if(currentUserId()!=null){
+            return  true;
+        }
+        return false;
+    }
 }

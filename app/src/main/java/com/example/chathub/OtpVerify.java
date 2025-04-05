@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chathub.utils.AndroidUtil;
+import com.example.chathub.utils.FirebaseUtil;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -37,15 +38,19 @@ public class OtpVerify extends AppCompatActivity {
     TextView resend;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    // New variables for resend timer
+
     private CountDownTimer resendTimer;
     private boolean isResendEnabled = true;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verify);
+
+
 
         otpInput = findViewById(R.id.editTextOtp);
         nextButton = findViewById(R.id.btnVerify);
@@ -144,7 +149,7 @@ public class OtpVerify extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     setInProgress(false);
                     if (task.isSuccessful()) {
-                        // Verification successful - proceed to next activity
+                        // Verification successful one can proceed to next activity
                         AndroidUtil.showToast(getApplicationContext(), "Verification successful!");
 
                         Intent intent = new Intent(OtpVerify.this, Profile.class);
@@ -182,7 +187,7 @@ public class OtpVerify extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                // Re-enable resend button
+                // resend button
                 isResendEnabled = true;
                 resend.setText("Resend OTP");
                 resend.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
@@ -193,7 +198,7 @@ public class OtpVerify extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Cancel the timer to prevent memory leaks
+        // Cancel the timer
         if (resendTimer != null) {
             resendTimer.cancel();
         }
