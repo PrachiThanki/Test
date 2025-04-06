@@ -35,23 +35,31 @@ android {
 
 dependencies {
 
+    // AndroidX Libraries
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.firebase.firestore)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.hbb20:ccp:2.7.3")
+
+    // Firebase (using BOM for version management)
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-auth")
-    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
-    implementation ("com.google.firebase:firebase-auth:21.0.3")
-    implementation ("com.google.firebase:firebase-firestore:24.0.1")
-    implementation ("com.google.firebase:firebase-storage:20.0.0")
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
-    implementation ("com.github.dhaval2404:imagepicker:2.1")
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-storage")
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
+
+    // Utility Libraries
+    implementation("com.hbb20:ccp:2.7.3") // Country Code Picker
+    implementation("com.github.bumptech.glide:glide:4.16.0") // Image Loading
+    implementation("com.github.dhaval2404:imagepicker:2.1") // Image Picker
+    implementation("com.google.android.gms:play-services-safetynet:18.0.1")
+
+
     implementation ("com.google.android.gms:play-services-safetynet:17.0.0")
     implementation ("com.google.android.gms:play-services-safetynet:17.0.0")
     implementation ("com.google.firebase:firebase-auth:22.1.2")

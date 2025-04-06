@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="#1A1E28">
+
+    <FrameLayout
+        android:id="@+id/profile_container"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true">
+
+        <!-- Profile image or initials background -->
+        <ImageView
+            android:id="@+id/profile_image_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_circle" />
+
+        <!-- Profile image -->
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:scaleType="centerCrop" />
+
+        <!-- Text for initials when no image -->
+        <TextView
+            android:id="@+id/profile_initials"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#1B2B48"
+            android:textStyle="bold" />
+
+        <!-- Online status indicator dot -->
+
+    </FrameLayout>
+
+    <!-- Username text -->
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/profile_container"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:textColor="#1B2B48"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/noResultsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="No users found"
+        android:textColor="#A0AEC0"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <!-- Status text (online, last seen...) -->
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_name"
+        android:layout_toEndOf="@id/profile_container"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:textColor="#1B2B48"
+        android:textSize="14sp" />
+
+
+</RelativeLayout>

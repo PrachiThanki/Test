@@ -2,12 +2,12 @@ package com.example.chathub.utils;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-public class FirebaseUtil {
+
+public class   FirebaseUtil {
     public static String currentUserId(){
         return FirebaseAuth.getInstance().getUid();
     }
@@ -27,5 +27,9 @@ public class FirebaseUtil {
             return  true;
         }
         return false;
+    }
+
+    public static CollectionReference allUserCollectionReference(){
+        return FirebaseFirestore.getInstance().collection("users");
     }
 }
